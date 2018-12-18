@@ -28,7 +28,6 @@ public class ModifyMyData extends Activity {
         setContentView(R.layout.modify);
         date = (TextView) findViewById(R.id.date);
         t1 = (EditText) findViewById(R.id.t1);
-
         Intent it = getIntent();
 
         String str_name = it.getStringExtra("it_name");
