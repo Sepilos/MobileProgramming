@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bliss.csc.mydiary">
+
+    <application
+        android:icon="@drawable/paper"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 고객등록 액티비티 -->
+        <activity android:name=".WriteDiaryActivity">
+        </activity>
+
+        <!-- 고객목록 액티비티 -->
+        <activity android:name=".ShowMyData">
+        </activity>
+
+        <activity android:name=".ModifyMyData">
+        </activity>
+
+        <!-- 고객정보 액티비티 -->
+
+        <!-- 고객삭제 액티비티 -->
+
+        <!-- 고객정보 수정 액티비티 -->
+
+        <!-- 도움알 액티비티 -->
+        <activity android:name=".AppHelpActivity">
+        </activity>
+
+    </application>
+
+</manifest>
