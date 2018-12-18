@@ -13,7 +13,7 @@ import android.widget.Spinner;
 
 public class WriteDiaryActivity extends Activity  {
 	
-	private DBManager dbmgr;
+	private DBManager manager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,13 +35,13 @@ public class WriteDiaryActivity extends Activity  {
 
 		
         try {
-            dbmgr = new DBManager(this);
+            manager = new DBManager(this);
             
             SQLiteDatabase sdb;
             
-            sdb = dbmgr.getWritableDatabase();
+            sdb = manager.getWritableDatabase();
             sdb.execSQL("insert into diaryTB values('" + diary_date + "', '" + diary_content +  "');");
-            dbmgr.close();
+            manager.close();
         } catch (SQLiteException e) {
         }
     	

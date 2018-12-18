@@ -35,8 +35,8 @@ public class ModifyMyData extends Activity {
         nowData = Integer.parseInt(str_name);
 
         try {
-            DBManager dbmgr = new DBManager(this);
-            SQLiteDatabase sdb = dbmgr.getWritableDatabase();
+            DBManager manager = new DBManager(this);
+            SQLiteDatabase sdb = manager.getWritableDatabase();
 
             cursor = sdb.query("diaryTB", null, null, null, null, null, null);
             cursor.moveToPosition(nowData - 1);
@@ -45,7 +45,7 @@ public class ModifyMyData extends Activity {
             diary_content = cursor.getString(1);
 
             cursor.close();
-            dbmgr.close();
+            manager.close();
 
         } catch (SQLiteException e) {
         }
@@ -57,9 +57,9 @@ public class ModifyMyData extends Activity {
 
         try {
 
-            DBManager dbmgr = new DBManager(this);
+            DBManager manager = new DBManager(this);
 
-            SQLiteDatabase sdb = dbmgr.getWritableDatabase();
+            SQLiteDatabase sdb = manager.getWritableDatabase();
             cursor = sdb.query("diaryTB", null, null, null, null, null, null);
 
             cursor.moveToPosition(nowData - 1);
@@ -72,7 +72,7 @@ public class ModifyMyData extends Activity {
             sdb.execSQL(sql);
 
             cursor.close();
-            dbmgr.close();
+            manager.close();
 
         } catch (SQLiteException e) {
         } // try

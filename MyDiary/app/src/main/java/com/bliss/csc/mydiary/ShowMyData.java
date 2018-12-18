@@ -18,7 +18,7 @@ public class ShowMyData extends Activity {
     TextView t1;
     String diary_content;
     String diary_date;
-    int numburOfData;
+    int numberOfData;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,16 +29,16 @@ public class ShowMyData extends Activity {
         t1 = (TextView) findViewById(R.id.t1);
 
         try {
-            DBManager dbmgr = new DBManager(this);
+            DBManager manager = new DBManager(this);
 
-            SQLiteDatabase sdb = dbmgr.getReadableDatabase();
+            SQLiteDatabase sdb = manager.getReadableDatabase();
 
             cursor = sdb.query("diaryTB", null, null, null, null, null, null);
 
-            numburOfData = cursor.getCount();
+            numberOfData = cursor.getCount();
             cursor.moveToFirst();
 
-            if (numburOfData == 0) nowData = 0;
+            if (numberOfData == 0) nowData = 0;
             else nowData = 1;
 
             if (cursor.getCount() > 0) {
@@ -47,7 +47,7 @@ public class ShowMyData extends Activity {
             }
 
             cursor.close();
-            dbmgr.close();
+            manager.close();
 
 
         } catch (SQLiteException e) {
@@ -59,20 +59,20 @@ public class ShowMyData extends Activity {
     public void nextData(View v) {
 
         try {
-            DBManager dbmgr = new DBManager(this);
+            DBManager manager = new DBManager(this);
 
-            SQLiteDatabase sdb = dbmgr.getReadableDatabase();
+            SQLiteDatabase sdb = manager.getReadableDatabase();
 
             cursor = sdb.query("diaryTB", null, null, null, null, null, null);
 
 
-            if (numburOfData == 0) nowData = 0;
+            if (numberOfData == 0) nowData = 0;
 
-            if (cursor.getCount() > 0 && nowData <= numburOfData) {
+            if (cursor.getCount() > 0 && nowData <= numberOfData) {
 
                 nowData += 1;
 
-                if (nowData >= numburOfData) nowData = numburOfData;
+                if (nowData >= numberOfData) nowData = numberOfData;
 
                 cursor.moveToPosition(nowData - 1);
 
@@ -81,7 +81,7 @@ public class ShowMyData extends Activity {
             }
 
             cursor.close();
-            dbmgr.close();
+            manager.close();
 
         } catch (SQLiteException e) {
 
@@ -93,14 +93,14 @@ public class ShowMyData extends Activity {
     public void previousData(View v) {
 
         try {
-            DBManager dbmgr = new DBManager(this);
+            DBManager manager = new DBManager(this);
 
-            SQLiteDatabase sdb = dbmgr.getReadableDatabase();
+            SQLiteDatabase sdb = manager.getReadableDatabase();
 
             cursor = sdb.query("diaryTB", null, null, null, null, null, null);
 
 
-            if (numburOfData == 0) nowData = 0;
+            if (numberOfData == 0) nowData = 0;
 
             if (cursor.getCount() > 0 && nowData > 1) {
 
@@ -115,7 +115,7 @@ public class ShowMyData extends Activity {
             }
 
             cursor.close();
-            dbmgr.close();
+            manager.close();
 
         } catch (SQLiteException e) {
 
@@ -127,14 +127,14 @@ public class ShowMyData extends Activity {
 
     public void deleteData(View v) {
 
-        if (numburOfData >= 1)
+        if (numberOfData >= 1)
             try {
 
-                DBManager dbmgr = new DBManager(this);
+                DBManager manager = new DBManager(this);
 
                 SQLiteDatabase sdb;
 
-                sdb = dbmgr.getWritableDatabase();
+                sdb = manager.getWritableDatabase();
                 cursor = sdb.query("diaryTB", null, null, null, null, null, null);
                 cursor.moveToPosition(nowData - 1);
                 diary_content = cursor.getString(0);
@@ -144,7 +144,7 @@ public class ShowMyData extends Activity {
                 sdb.execSQL(sql);
 
                 cursor.close();
-                dbmgr.close();
+                manager.close();
             } catch (SQLiteException e) {
 
             }
